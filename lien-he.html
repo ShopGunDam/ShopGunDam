@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUNPLA STORE | Liên Hệ - Kết Nối Vũ Trụ</title>
+    <meta name="description" content="Liên hệ với GUNPLA STORE - Chuyên cung cấp mô hình Gunpla chính hãng Bandai. Hỗ trợ tư vấn, đặt hàng, báo giá 24/7.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&family=Open+Sans:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Shared CSS from Nam branch -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================================
+           CONTACT PAGE - HERO BANNER
+           ========================================= */
+        .contact-hero {
+            position: relative;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding-top: var(--header-height);
+            background: #05070a;
+        }
+
+        .contact-hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 60% 50%, rgba(59,130,246,0.13) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(239,68,68,0.08) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(5,7,10,0) 60%, #05070a 100%);
+        }
+
+        .contact-hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59,130,246,0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,130,246,0.07) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Animated scanning beam */
+        .hero-scan-beam {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59,130,246,0.08), transparent);
+            animation: beam-sweep 5s ease-in-out infinite;
+        }
+        @keyframes beam-sweep {
+            0% { left: -200px; }
+            100% { left: 110%; }
+        }
+
+        /* Corner brackets */
+        .corner-bracket {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.4;
+        }
+        .corner-bracket.tl { top: 20px; left: 20px; border-top: 2px solid var(--primary-color); border-left: 2px solid var(--primary-color); }
+        .corner-bracket.tr { top: 20px; right: 20px; border-top: 2px solid var(--primary-color); border-right: 2px solid var(--primary-color); }
+        .corner-bracket.bl { bottom: 20px; left: 20px; border-bottom: 2px solid var(--primary-color); border-left: 2px solid var(--primary-color); }
+        .corner-bracket.br { bottom: 20px; right: 20px; border-bottom: 2px solid var(--primary-color); border-right: 2px solid var(--primary-color); }
+
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-subheading);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .page-breadcrumb a { color: var(--primary-color); }
+        .page-breadcrumb i { font-size: 0.9rem; }
+
+        .contact-hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .contact-hero-title .line2 {
+            color: var(--primary-color);
+            text-shadow: 0 0 30px var(--primary-glow), 0 0 60px rgba(59,130,246,0.3);
+        }
+
+        .contact-hero-sub {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        /* Floating status indicators */
+        .hero-status-bar {
+            display: flex;
+            gap: 25px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+        .status-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-subheading);
+            font-size: 0.78rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--neon-green);
+            border: 1px solid rgba(0,255,204,0.25);
+            padding: 6px 14px;
+            clip-path: var(--clip-btn);
+            background: rgba(0,255,204,0.04);
+        }
+        .status-chip .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--neon-green);
+            box-shadow: 0 0 6px var(--neon-green);
+            animation: pulse-dot 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        /* =========================================
+           CONTACT INFO CARDS ROW
+           ========================================= */
+        .contact-info-section {
+            padding: 80px 0 60px;
+        }
+
+        .info-cards-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 70px;
+        }
+
+        .info-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            clip-path: var(--clip-card);
+            padding: 35px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            border-color: var(--primary-color);
+            background: var(--bg-surface-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(59,130,246,0.1), 0 0 0 1px rgba(59,130,246,0.2);
+        }
+
+        .info-card:hover::before { opacity: 1; }
+
+        .info-card-scanner {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--primary-color);
+            box-shadow: 0 0 12px var(--primary-glow);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .info-card:hover .info-card-scanner {
+            opacity: 1;
+            animation: scan 2s linear infinite;
+        }
+
+        .info-card-icon {
+            width: 54px;
+            height: 54px;
+            background: rgba(59,130,246,0.08);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: var(--clip-btn);
+            margin-bottom: 22px;
+            transition: var(--transition);
+        }
+        .info-card:hover .info-card-icon {
+            background: rgba(59,130,246,0.18);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(59,130,246,0.3);
+        }
+        .info-card-icon i {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+        }
+
+        .info-card-label {
+            font-family: var(--font-subheading);
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .info-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .info-card-value {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .info-card-value a {
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        .info-card-value a:hover {
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* =========================================
+           MAIN CONTENT: FORM + MAP/SOCIAL
+           ========================================= */
+        .contact-main-section {
+            padding: 0 0 100px;
+        }
+
+        .contact-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* --- CONTACT FORM PANEL --- */
+        .form-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            clip-path: var(--clip-card);
+            padding: 45px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-panel::after {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .form-panel-header {
+            margin-bottom: 35px;
+        }
+
+        .form-panel-tag {
+            display: inline-block;
+            font-family: var(--font-subheading);
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            border: 1px solid rgba(239,68,68,0.35);
+            padding: 4px 12px;
+            clip-path: var(--clip-btn);
+            background: rgba(239,68,68,0.06);
+            margin-bottom: 15px;
+        }
+
+        .form-panel-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .form-panel-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Form inputs */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-family: var(--font-subheading);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            background: rgba(5, 7, 10, 0.6);
+            border: 1px solid rgba(59,130,246,0.2);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            padding: 13px 16px;
+            outline: none;
+            transition: var(--transition);
+            clip-path: var(--clip-btn);
+            width: 100%;
+        }
+
+        .form-control::placeholder {
+            color: rgba(100, 116, 139, 0.5);
+            font-size: 0.85rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            background: rgba(59,130,246,0.05);
+            box-shadow: 0 0 0 1px var(--primary-color), inset 0 0 15px rgba(59,130,246,0.05);
+        }
+
+        select.form-control {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233b82f6' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        select.form-control option {
+            background: #05070a;
+            color: var(--text-main);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 130px;
+            clip-path: none;
+            border-radius: 0;
+        }
+
+        /* Priority selector */
+        .priority-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .priority-btn {
+            font-family: var(--font-subheading);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 7px 16px;
+            border: 1px solid rgba(59,130,246,0.25);
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            clip-path: var(--clip-btn);
+            transition: var(--transition);
+        }
+        .priority-btn:hover,
+        .priority-btn.active {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: rgba(59,130,246,0.08);
+        }
+        .priority-btn.urgent.active {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+            background: rgba(239,68,68,0.08);
+        }
+
+        /* Submit button */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(59,130,246,0.08));
+            border: 1px solid var(--primary-color);
+            color: #fff;
+            cursor: pointer;
+            clip-path: var(--clip-btn);
+            font-family: var(--font-subheading);
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-submit:hover::before { left: 100%; }
+        .btn-submit:hover {
+            background: var(--primary-color);
+            box-shadow: 0 0 30px var(--primary-glow), 0 10px 30px rgba(59,130,246,0.3);
+            transform: translateY(-2px);
+        }
+        .btn-submit:active { transform: translateY(0); }
+
+        /* Success message */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .form-success.show { display: block; }
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            border: 2px solid var(--neon-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: success-pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes success-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,204,0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(0,255,204,0); }
+        }
+        .success-icon i { font-size: 2rem; color: var(--neon-green); }
+        .success-title { font-family: var(--font-heading); font-size: 1.4rem; letter-spacing: 2px; color: var(--neon-green); margin-bottom: 10px; }
+        .success-msg { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* --- RIGHT PANEL: SOCIAL + MAP + FAQ --- */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Social links card */
+        .social-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            clip-path: var(--clip-card);
+            padding: 35px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-card-header {
+            margin-bottom: 25px;
+        }
+
+        .social-card-tag {
+            font-family: var(--font-subheading);
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .social-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .social-links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-link-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 18px;
+            background: rgba(5,7,10,0.5);
+            border: 1px solid rgba(59,130,246,0.12);
+            clip-path: var(--clip-btn);
+            transition: var(--transition);
+            text-decoration: none;
+            color: var(--text-muted);
+        }
+
+        .social-link-item:hover {
+            border-color: var(--primary-color);
+            background: rgba(59,130,246,0.08);
+            color: var(--text-main);
+            transform: translateX(6px);
+        }
+
+        .social-link-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            clip-path: var(--clip-btn);
+        }
+
+        .social-link-icon i { font-size: 1.3rem; }
+
+        .sl-facebook .social-link-icon { background: rgba(24,119,242,0.15); border: 1px solid rgba(24,119,242,0.3); }
+        .sl-facebook .social-link-icon i { color: #1877f2; }
+        .sl-facebook:hover { border-color: #1877f2; background: rgba(24,119,242,0.08); }
+
+        .sl-youtube .social-link-icon { background: rgba(255,0,0,0.12); border: 1px solid rgba(255,0,0,0.25); }
+        .sl-youtube .social-link-icon i { color: #ff0000; }
+        .sl-youtube:hover { border-color: #ff0000; background: rgba(255,0,0,0.06); }
+
+        .sl-instagram .social-link-icon { background: rgba(225,48,108,0.12); border: 1px solid rgba(225,48,108,0.25); }
+        .sl-instagram .social-link-icon i { color: #e1306c; }
+        .sl-instagram:hover { border-color: #e1306c; background: rgba(225,48,108,0.06); }
+
+        .sl-tiktok .social-link-icon { background: rgba(0,242,234,0.12); border: 1px solid rgba(0,242,234,0.25); }
+        .sl-tiktok .social-link-icon i { color: #00f2ea; }
+        .sl-tiktok:hover { border-color: #00f2ea; background: rgba(0,242,234,0.06); }
+
+        .social-link-info { flex: 1; }
+        .social-link-name {
+            font-family: var(--font-subheading);
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+        .social-link-handle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        .social-link-arrow i {
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .social-link-item:hover .social-link-arrow i {
+            transform: translateX(4px);
+            color: var(--primary-color);
+        }
+
+        /* Operating hours card */
+        .hours-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            clip-path: var(--clip-card);
+            padding: 30px;
+            position: relative;
+        }
+
+        .hours-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .hours-header i { font-size: 1.5rem; color: var(--primary-color); }
+        .hours-header-text h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .hours-header-text span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .hours-list { display: flex; flex-direction: column; gap: 10px; }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: rgba(5,7,10,0.4);
+            border: 1px solid rgba(59,130,246,0.08);
+            transition: var(--transition);
+        }
+        .hours-row:hover { border-color: rgba(59,130,246,0.25); }
+        .hours-row.today { border-color: rgba(0,255,204,0.3); background: rgba(0,255,204,0.03); }
+
+        .hours-day {
+            font-family: var(--font-subheading);
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .hours-row.today .hours-day { color: var(--neon-green); }
+
+        .hours-time {
+            font-family: var(--font-heading);
+            font-size: 0.88rem;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+        .hours-row.today .hours-time { color: var(--neon-green); text-shadow: 0 0 8px rgba(0,255,204,0.4); }
+
+        .today-badge {
+            font-size: 0.65rem;
+            letter-spacing: 1.5px;
+            background: rgba(0,255,204,0.1);
+            border: 1px solid rgba(0,255,204,0.3);
+            color: var(--neon-green);
+            padding: 2px 7px;
+        }
+
+        /* =========================================
+           MAP SECTION
+           ========================================= */
+        .map-section {
+            padding: 0 0 100px;
+        }
+
+        .map-section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .map-wrapper {
+            position: relative;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            clip-path: var(--clip-card);
+            overflow: hidden;
+        }
+
+        .map-overlay-top {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color), var(--neon-green));
+            z-index: 5;
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            display: block;
+            filter: grayscale(0.8) brightness(0.7) contrast(1.1) hue-rotate(180deg);
+            transition: var(--transition);
+        }
+        .map-wrapper:hover .map-iframe {
+            filter: grayscale(0.3) brightness(0.85) contrast(1.05);
+        }
+
+        .map-coords {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            padding: 18px 30px;
+            background: rgba(5,7,10,0.6);
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+        .coord-item {
+            font-family: var(--font-subheading);
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        .coord-item span { color: var(--neon-green); margin-left: 6px; }
+
+        /* =========================================
+           FAQ SECTION
+           ========================================= */
+        .faq-section {
+            padding: 0 0 100px;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            clip-path: var(--clip-card);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .faq-item:hover { border-color: var(--primary-color); }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 22px 25px;
+            cursor: pointer;
+            gap: 15px;
+            user-select: none;
+        }
+
+        .faq-q-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .faq-number {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: rgba(59,130,246,0.25);
+            min-width: 30px;
+        }
+        .faq-item.open .faq-number { color: var(--primary-color); }
+
+        .faq-q-text {
+            font-family: var(--font-subheading);
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text-main);
+        }
+
+        .faq-toggle {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            clip-path: var(--clip-btn);
+            transition: var(--transition);
+        }
+        .faq-item:hover .faq-toggle,
+        .faq-item.open .faq-toggle {
+            border-color: var(--primary-color);
+            background: rgba(59,130,246,0.1);
+        }
+        .faq-toggle i {
+            font-size: 1rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+        .faq-item.open .faq-toggle i { transform: rotate(45deg); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+            padding: 0 25px;
+            border-top: 0 solid transparent;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding: 0 25px 22px;
+            border-top: 1px solid var(--border-color);
+        }
+        .faq-answer p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+            padding-top: 18px;
+        }
+
+        /* =========================================
+           SECTION HEADERS (SHARED STYLE)
+           ========================================= */
+        .section-header { text-align: center; margin-bottom: 55px; }
+        .section-title { font-family: var(--font-heading); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+        .section-subtitle { font-size: 0.95rem; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color));
+        }
+        .section-divider::after { background: linear-gradient(270deg, transparent, var(--primary-color)); }
+        .section-divider i { font-size: 1rem; color: var(--primary-color); }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 992px) {
+            .contact-main-grid { grid-template-columns: 1fr; }
+            .info-cards-row { grid-template-columns: 1fr 1fr; }
+            .faq-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .info-cards-row { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .form-panel { padding: 30px 22px; }
+            .social-card { padding: 25px 20px; }
+            .contact-hero-title { font-size: 2.2rem; }
+            .hero-status-bar { gap: 12px; }
+            .map-coords { gap: 15px; }
+        }
+
+        @media (max-width: 480px) {
+            .contact-hero-title { font-size: 1.8rem; }
+            .priority-group { flex-direction: column; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ==================== HEADER (Kế thừa từ Nam) ==================== -->
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="index.html" class="logo">
+                <i class='bx bx-hive'></i>
+                <span class="logo-text">GUNPLA<span class="highlight">STORE</span></span>
+            </a>
+
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link">TRANG CHỦ</a></li>
+                    <li class="nav-item"><a href="store.html" class="nav-link">CỬA HÀNG</a></li>
+                    <li class="nav-item"><a href="#tools" class="nav-link">DỤNG CỤ</a></li>
+                    <li class="nav-item"><a href="#guide" class="nav-link">HƯỚNG DẪN</a></li>
+                    <li class="nav-item"><a href="lien-he.html" class="nav-link active">LIÊN HỆ</a></li>
+                </ul>
+                <div class="nav-close" id="nav-close">
+                    <i class='bx bx-x'></i>
+                </div>
+            </div>
+
+            <div class="nav-tools">
+                <div class="search-box">
+                    <input type="text" placeholder="Tìm kiếm Gunpla..." class="search-input">
+                    <i class='bx bx-target-lock search-icon'></i>
+                </div>
+                <a href="#" class="cart-icon">
+                    <i class='bx bx-cart-alt'></i>
+                    <span class="cart-count">2</span>
+                </a>
+                <a href="#" class="user-icon">
+                    <i class='bx bx-user-circle'></i>
+                </a>
+                <div class="nav-toggle" id="nav-toggle">
+                    <i class='bx bx-menu-alt-right'></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+
+        <!-- ==================== HERO BANNER ==================== -->
+        <section class="contact-hero" id="contact-hero">
+            <div class="contact-hero-bg"></div>
+            <div class="contact-hero-grid"></div>
+            <div class="hero-scan-beam"></div>
+
+            <!-- Corner brackets decoration -->
+            <div class="corner-bracket tl"></div>
+            <div class="corner-bracket tr"></div>
+            <div class="corner-bracket bl"></div>
+            <div class="corner-bracket br"></div>
+
+            <div class="container contact-hero-content">
+                <div class="page-breadcrumb">
+                    <a href="index.html">TRANG CHỦ</a>
+                    <i class='bx bx-chevron-right'></i>
+                    <span>LIÊN HỆ</span>
+                </div>
+
+                <h1 class="contact-hero-title">
+                    KẾT NỐI<br>
+                    <span class="line2">VŨ TRỤ GUNPLA</span>
+                </h1>
+                <p class="contact-hero-sub">
+                    Gửi tín hiệu đến chúng tôi. Đội ngũ hỗ trợ luôn trực tuyến 24/7 — tư vấn, đặt hàng, và giải đáp mọi thắc mắc về Gunpla của bạn.
+                </p>
+
+                <div class="hero-status-bar">
+                    <div class="status-chip">
+                        <div class="dot"></div>
+                        HỆ THỐNG TRỰC TUYẾN
+                    </div>
+                    <div class="status-chip">
+                        <div class="dot"></div>
+                        PHẢN HỒI &lt; 30 PHÚT
+                    </div>
+                    <div class="status-chip">
+                        <div class="dot"></div>
+                        HỖ TRỢ 24/7
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== INFO CARDS ==================== -->
+        <section class="contact-info-section" id="contact-info">
+            <div class="container">
+                <div class="info-cards-row">
+                    <!-- Card 1: Address -->
+                    <div class="info-card" id="card-address">
+                        <div class="info-card-scanner"></div>
+                        <div class="info-card-icon">
+                            <i class='bx bx-map-pin'></i>
+                        </div>
+                        <div class="info-card-label">TỌA ĐỘ CĂN CỨ</div>
+                        <div class="info-card-title">ĐỊA CHỈ</div>
+                        <div class="info-card-value">
+                            123 Đường Lắp Ráp, Phường Gundam<br>
+                            Quận Mô Hình, TP. Hồ Chí Minh<br>
+                            <a href="#map-section">› Xem bản đồ</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Phone/Chat -->
+                    <div class="info-card" id="card-phone">
+                        <div class="info-card-scanner"></div>
+                        <div class="info-card-icon">
+                            <i class='bx bx-headphone'></i>
+                        </div>
+                        <div class="info-card-label">TÍN HIỆU LIÊN LẠC</div>
+                        <div class="info-card-title">HOTLINE & CHAT</div>
+                        <div class="info-card-value">
+                            <a href="tel:0901234567">0901 234 567</a><br>
+                            <a href="tel:0287654321">028 7654 321</a><br>
+                            <a href="#">› Chat Zalo ngay</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Email -->
+                    <div class="info-card" id="card-email">
+                        <div class="info-card-scanner"></div>
+                        <div class="info-card-icon">
+                            <i class='bx bx-envelope'></i>
+                        </div>
+                        <div class="info-card-label">ĐƯỜNG TRUYỀN DỮ LIỆU</div>
+                        <div class="info-card-title">EMAIL</div>
+                        <div class="info-card-value">
+                            <a href="mailto:hello@gunplastore.vn">hello@gunplastore.vn</a><br>
+                            <a href="mailto:order@gunplastore.vn">order@gunplastore.vn</a><br>
+                            <a href="#">› Gửi email ngay</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== MAIN GRID: FORM + SOCIAL ==================== -->
+                <div class="contact-main-grid">
+                    <!-- LEFT: Contact Form -->
+                    <div class="form-panel" id="contact-form-panel">
+                        <div class="form-panel-header">
+                            <div class="form-panel-tag">TRUYỀN TÍN HIỆU</div>
+                            <h2 class="form-panel-title">GỬI TIN<br><span class="highlight">NHẮN ĐẾN CHÚNG TÔI</span></h2>
+                            <p class="form-panel-subtitle">Điền thông tin bên dưới — hệ thống sẽ xử lý và phản hồi trong vòng 30 phút.</p>
+                        </div>
+
+                        <form id="contact-form" novalidate>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label" for="input-name">Họ & Tên</label>
+                                    <input type="text" id="input-name" class="form-control" placeholder="Nguyễn Văn A" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="input-phone">Số điện thoại</label>
+                                    <input type="tel" id="input-phone" class="form-control" placeholder="09xx xxx xxx" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="input-email">Email</label>
+                                <input type="email" id="input-email" class="form-control" placeholder="your@email.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="input-topic">Chủ đề liên hệ</label>
+                                <select id="input-topic" class="form-control">
+                                    <option value="">-- Chọn chủ đề --</option>
+                                    <option value="order">Đặt hàng / Báo giá</option>
+                                    <option value="consult">Tư vấn sản phẩm Gunpla</option>
+                                    <option value="shipping">Vận chuyển & Giao hàng</option>
+                                    <option value="return">Đổi trả & Bảo hành</option>
+                                    <option value="collab">Hợp tác & Đại lý</option>
+                                    <option value="other">Khác</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Mức độ ưu tiên</label>
+                                <div class="priority-group">
+                                    <button type="button" class="priority-btn active" id="priority-normal" onclick="setPriority(this)">THƯỜNG</button>
+                                    <button type="button" class="priority-btn" id="priority-high" onclick="setPriority(this)">CAO</button>
+                                    <button type="button" class="priority-btn urgent" id="priority-urgent" onclick="setPriority(this)">KHẨN CẤP</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="input-message">Nội dung tin nhắn</label>
+                                <textarea id="input-message" class="form-control" placeholder="Mô tả chi tiết yêu cầu của bạn... Ví dụ: Tôi muốn hỏi về PG Unleashed RX-78-2, giá hiện tại và thời gian giao hàng?" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-submit" id="submit-btn">
+                                <i class='bx bx-send'></i>
+                                PHÁT TÍN HIỆU
+                            </button>
+                        </form>
+
+                        <div class="form-success" id="form-success">
+                            <div class="success-icon">
+                                <i class='bx bx-check'></i>
+                            </div>
+                            <div class="success-title">TÍN HIỆU ĐÃ ĐƯỢC GỬI!</div>
+                            <p class="success-msg">Hệ thống đã nhận được thông điệp của bạn.<br>Chúng tôi sẽ phản hồi trong vòng 30 phút.</p>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Social + Hours -->
+                    <div class="right-panel">
+                        <!-- Social Links -->
+                        <div class="social-card" id="social-links-card">
+                            <div class="social-card-header">
+                                <div class="social-card-tag">MẠNG LƯỚI KẾT NỐI</div>
+                                <h3 class="social-card-title">THEO DÕI<br><span class="highlight">CHÚNG TÔI</span></h3>
+                            </div>
+                            <div class="social-links-list">
+                                <a href="#" class="social-link-item sl-facebook" id="link-facebook">
+                                    <div class="social-link-icon">
+                                        <i class='bx bxl-facebook'></i>
+                                    </div>
+                                    <div class="social-link-info">
+                                        <div class="social-link-name">FACEBOOK</div>
+                                        <div class="social-link-handle">@GunplaStore.VN · 12.5K followers</div>
+                                    </div>
+                                    <div class="social-link-arrow"><i class='bx bx-right-arrow-alt'></i></div>
+                                </a>
+
+                                <a href="#" class="social-link-item sl-youtube" id="link-youtube">
+                                    <div class="social-link-icon">
+                                        <i class='bx bxl-youtube'></i>
+                                    </div>
+                                    <div class="social-link-info">
+                                        <div class="social-link-name">YOUTUBE</div>
+                                        <div class="social-link-handle">@GunplaStore · 8.2K subscribers</div>
+                                    </div>
+                                    <div class="social-link-arrow"><i class='bx bx-right-arrow-alt'></i></div>
+                                </a>
+
+                                <a href="#" class="social-link-item sl-instagram" id="link-instagram">
+                                    <div class="social-link-icon">
+                                        <i class='bx bxl-instagram'></i>
+                                    </div>
+                                    <div class="social-link-info">
+                                        <div class="social-link-name">INSTAGRAM</div>
+                                        <div class="social-link-handle">@gunplastore.vn · 5.7K followers</div>
+                                    </div>
+                                    <div class="social-link-arrow"><i class='bx bx-right-arrow-alt'></i></div>
+                                </a>
+
+                                <a href="#" class="social-link-item sl-tiktok" id="link-tiktok">
+                                    <div class="social-link-icon">
+                                        <i class='bx bxl-tiktok'></i>
+                                    </div>
+                                    <div class="social-link-info">
+                                        <div class="social-link-name">TIKTOK</div>
+                                        <div class="social-link-handle">@gunplastore · 3.1K followers</div>
+                                    </div>
+                                    <div class="social-link-arrow"><i class='bx bx-right-arrow-alt'></i></div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Operating Hours -->
+                        <div class="hours-card" id="hours-card">
+                            <div class="hours-header">
+                                <i class='bx bx-time-five'></i>
+                                <div class="hours-header-text">
+                                    <h3>GIỜ HOẠT ĐỘNG</h3>
+                                    <span>MÚNG GIỜ VIỆT NAM (GMT+7)</span>
+                                </div>
+                            </div>
+                            <div class="hours-list">
+                                <div class="hours-row">
+                                    <span class="hours-day">Thứ 2 – Thứ 6</span>
+                                    <span class="hours-time">08:00 – 21:00</span>
+                                </div>
+                                <div class="hours-row today" id="hours-saturday">
+                                    <span class="hours-day">Thứ 7 <span class="today-badge">HÔM NAY</span></span>
+                                    <span class="hours-time">08:00 – 22:00</span>
+                                </div>
+                                <div class="hours-row">
+                                    <span class="hours-day">Chủ Nhật</span>
+                                    <span class="hours-time">09:00 – 20:00</span>
+                                </div>
+                                <div class="hours-row">
+                                    <span class="hours-day">Ngày Lễ</span>
+                                    <span class="hours-time">10:00 – 18:00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== MAP SECTION ==================== -->
+        <section class="map-section section" id="map-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-divider">
+                        <i class='bx bx-map'></i>
+                    </div>
+                    <h2 class="section-title">TỌA ĐỘ <span class="highlight">CĂN CỨ</span></h2>
+                    <p class="section-subtitle">Ghé thăm showroom để trải nghiệm trực tiếp hàng trăm mô hình Gunpla chính hãng.</p>
+                </div>
+
+                <div class="map-wrapper" id="map-wrapper">
+                    <div class="map-overlay-top"></div>
+                    <iframe
+                        id="store-map"
+                        class="map-iframe"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4441!2d106.6296!3d10.7769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ2JzM2LjkiTiAxMDbCsDM3JzQ2LjYiRQ!5e0!3m2!1svi!2svn!4v1716500000000!5m2!1svi!2svn"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Bản đồ GUNPLA STORE">
+                    </iframe>
+                    <div class="map-coords">
+                        <div class="coord-item">LAT:<span>10.7769° N</span></div>
+                        <div class="coord-item">LONG:<span>106.6296° E</span></div>
+                        <div class="coord-item">ZONE:<span>HỒ CHÍ MINH</span></div>
+                        <div class="coord-item">STATUS:<span>ĐANG MỞ CỬA</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FAQ SECTION ==================== -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-divider">
+                        <i class='bx bx-help-circle'></i>
+                    </div>
+                    <h2 class="section-title">CÂU HỎI <span class="highlight">THƯỜNG GẶP</span></h2>
+                    <p class="section-subtitle">Những thắc mắc phổ biến về sản phẩm, đặt hàng và dịch vụ tại GUNPLA STORE.</p>
+                </div>
+
+                <div class="faq-grid" id="faq-grid">
+                    <div class="faq-item" id="faq-1">
+                        <div class="faq-question" onclick="toggleFaq('faq-1')">
+                            <div class="faq-q-left">
+                                <span class="faq-number">01</span>
+                                <span class="faq-q-text">Sản phẩm có phải hàng chính hãng Bandai không?</span>
+                            </div>
+                            <div class="faq-toggle"><i class='bx bx-plus'></i></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Tất cả sản phẩm tại GUNPLA STORE đều là hàng chính hãng 100% từ Bandai Nhật Bản. Chúng tôi có giấy tờ chứng nhận nhà phân phối ủy quyền và cam kết hoàn tiền nếu phát hiện hàng giả.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-2">
+                        <div class="faq-question" onclick="toggleFaq('faq-2')">
+                            <div class="faq-q-left">
+                                <span class="faq-number">02</span>
+                                <span class="faq-q-text">Thời gian giao hàng là bao lâu?</span>
+                            </div>
+                            <div class="faq-toggle"><i class='bx bx-plus'></i></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nội thành TP.HCM: 2-4 tiếng (giao nhanh). Các tỉnh thành khác: 1-3 ngày. Đơn hàng đặt trước (pre-order) có thể kéo dài 2-8 tuần tùy sản phẩm — chúng tôi sẽ thông báo cụ thể khi đặt.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-3">
+                        <div class="faq-question" onclick="toggleFaq('faq-3')">
+                            <div class="faq-q-left">
+                                <span class="faq-number">03</span>
+                                <span class="faq-q-text">Có thể đổi trả sản phẩm không?</span>
+                            </div>
+                            <div class="faq-toggle"><i class='bx bx-plus'></i></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Chúng tôi hỗ trợ đổi trả trong 7 ngày kể từ ngày nhận hàng nếu sản phẩm bị lỗi do sản xuất. Sản phẩm cần còn nguyên hộp, tem niêm phong. Liên hệ hotline để được hướng dẫn quy trình đổi trả.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-4">
+                        <div class="faq-question" onclick="toggleFaq('faq-4')">
+                            <div class="faq-q-left">
+                                <span class="faq-number">04</span>
+                                <span class="faq-q-text">Làm thế nào để đặt hàng số lượng lớn / làm đại lý?</span>
+                            </div>
+                            <div class="faq-toggle"><i class='bx bx-plus'></i></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Chúng tôi có chính sách đại lý và giảm giá sỉ hấp dẫn. Vui lòng điền form liên hệ bên trên, chọn chủ đề "Hợp tác & Đại lý". Đội ngũ kinh doanh sẽ liên hệ và báo giá trong 2 giờ làm việc.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-5">
+                        <div class="faq-question" onclick="toggleFaq('faq-5')">
+                            <div class="faq-q-left">
+                                <span class="faq-number">05</span>
+                                <span class="faq-q-text">Gunpla nào phù hợp cho người mới bắt đầu?</span>
+                            </div>
+                            <div class="faq-toggle"><i class='bx bx-plus'></i></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Người mới nên bắt đầu với HG (High Grade) hoặc SD — lắp ráp đơn giản, giá cả phải chăng. Khi đã quen có thể nâng lên RG, MG và cuối cùng là PG. Đội ngũ tư vấn luôn sẵn sàng giúp bạn chọn kit phù hợp nhất.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" id="faq-6">
+                        <div class="faq-question" onclick="toggleFaq('faq-6')">
+                            <div class="faq-q-left">
+                                <span class="faq-number">06</span>
+                                <span class="faq-q-text">Có hỗ trợ thanh toán trả góp không?</span>
+                            </div>
+                            <div class="faq-toggle"><i class='bx bx-plus'></i></div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Có! Chúng tôi hỗ trợ thanh toán trả góp 0% lãi suất qua thẻ tín dụng cho đơn hàng từ 1.000.000₫ trở lên. Hỗ trợ các ngân hàng: Vietcombank, Techcombank, VPBank, MB Bank. Liên hệ để biết thêm chi tiết.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER (Kế thừa từ Nam) ==================== -->
+    <footer class="footer-minimal">
+        <div class="container">
+            <div class="footer-top">
+                <a href="index.html" class="logo">
+                    <i class='bx bx-hive'></i>
+                    <span class="logo-text">GUNPLA<span class="highlight">STORE</span></span>
+                </a>
+                <div class="sys-info">
+                    <span>SYS.VER: 2.0.4</span>
+                    <span>NET: SECURE</span>
+                </div>
+            </div>
+
+            <div class="footer-grid">
+                <div class="f-col">
+                    <h4>CĂN CỨ DỮ LIỆU</h4>
+                    <a href="#">Hướng dẫn lắp ráp</a>
+                    <a href="#">Phân loại Grade</a>
+                    <a href="#">Công cụ & Phụ kiện</a>
+                </div>
+                <div class="f-col">
+                    <h4>LIÊN KẾT MẠNG</h4>
+                    <a href="#">Mạng lưới Facebook</a>
+                    <a href="#">Kênh truyền tín hiệu Youtube</a>
+                    <a href="#">Tín hiệu Instagram</a>
+                </div>
+                <div class="f-col">
+                    <h4>GIAO THỨC BẢO MẬT</h4>
+                    <a href="#">Chính sách bảo mật</a>
+                    <a href="#">Điều khoản sử dụng</a>
+                    <a href="#">Giao thức hoàn trả</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 G-STORE NETWORK. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        /* =========================================
+           MOBILE MENU TOGGLE (Inherited from Nam)
+           ========================================= */
+        const navMenu = document.getElementById('nav-menu');
+        const navToggle = document.getElementById('nav-toggle');
+        const navClose = document.getElementById('nav-close');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        if (navToggle) {
+            navToggle.addEventListener('click', () => navMenu.classList.add('show-menu'));
+        }
+        if (navClose) {
+            navClose.addEventListener('click', () => navMenu.classList.remove('show-menu'));
+        }
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => navMenu.classList.remove('show-menu'));
+        });
+
+        /* STICKY HEADER */
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY >= 50);
+        });
+
+        /* =========================================
+           PRIORITY BUTTON TOGGLE
+           ========================================= */
+        function setPriority(btn) {
+            document.querySelectorAll('.priority-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        /* =========================================
+           FAQ ACCORDION
+           ========================================= */
+        function toggleFaq(id) {
+            const item = document.getElementById(id);
+            const isOpen = item.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+
+            // Open clicked if it was closed
+            if (!isOpen) item.classList.add('open');
+        }
+
+        /* =========================================
+           CONTACT FORM SUBMIT
+           ========================================= */
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('input-name').value.trim();
+            const phone = document.getElementById('input-phone').value.trim();
+            const message = document.getElementById('input-message').value.trim();
+
+            if (!name || !phone || !message) {
+                // Shake animation on empty fields
+                [document.getElementById('input-name'), document.getElementById('input-phone'), document.getElementById('input-message')].forEach(field => {
+                    if (!field.value.trim()) {
+                        field.style.borderColor = 'var(--secondary-color)';
+                        field.style.boxShadow = '0 0 0 1px var(--secondary-color)';
+                        setTimeout(() => {
+                            field.style.borderColor = '';
+                            field.style.boxShadow = '';
+                        }, 2000);
+                    }
+                });
+                return;
+            }
+
+            // Simulate sending
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.innerHTML = '<i class=\'bx bx-loader-alt bx-spin\'></i> ĐANG GỬI...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                contactForm.style.display = 'none';
+                formSuccess.classList.add('show');
+            }, 1800);
+        });
+
+        /* =========================================
+           AUTO HIGHLIGHT TODAY'S HOURS
+           ========================================= */
+        const today = new Date().getDay(); // 0=Sun, 6=Sat
+        const allHoursRows = document.querySelectorAll('.hours-row');
+        allHoursRows.forEach(row => row.classList.remove('today'));
+
+        const todayBadgeHTML = ' <span class="today-badge">HÔM NAY</span>';
+
+        if (today === 6) {
+            // Saturday
+            const satRow = document.getElementById('hours-saturday');
+            if (satRow) satRow.classList.add('today');
+        } else if (today === 0) {
+            // Sunday
+            allHoursRows[2]?.classList.add('today');
+        } else {
+            // Weekday
+            allHoursRows[0]?.classList.add('today');
+        }
+
+        /* =========================================
+           SCROLL REVEAL ANIMATION
+           ========================================= */
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.info-card, .form-panel, .social-card, .hours-card, .faq-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            revealObserver.observe(el);
+        });
+    </script>
+</body>
+
+</html>
