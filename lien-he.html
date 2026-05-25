@@ -1956,6 +1956,33 @@
                 reflex.style.opacity = '0';
             });
         });
+
+        /* =========================================
+           AUTO-INJECT GUNDAM ARMOR SHIFTERS & MECH CHASSIS
+           ========================================= */
+        document.querySelectorAll('.info-card, .why-card, .testi-card, .social-card').forEach(card => {
+            // Đảm bảo card có position relative
+            card.style.position = 'relative';
+            
+            // Tạo Mech Chassis (khung gầm cơ khí ẩn phía dưới)
+            const chassis = document.createElement('div');
+            chassis.className = 'mech-chassis';
+            chassis.innerHTML = `
+                <div class="mech-warning-label">
+                    <span class="blink-dot"></span>
+                    HATCH OPEN : SYSTEM ACTV
+                </div>
+            `;
+            card.insertBefore(chassis, card.firstChild);
+            
+            // Tạo 4 tấm giáp góc trượt phân rã (Armor Shifters)
+            const corners = ['tl', 'tr', 'bl', 'br'];
+            corners.forEach(pos => {
+                const shifter = document.createElement('div');
+                shifter.className = `armor-shifter ${pos}`;
+                card.appendChild(shifter);
+            });
+        });
     </script>
 </body>
 
