@@ -79,6 +79,29 @@
         }
 
         /* =========================================
+           3D TILT & HOLO REFLEX (GUNDAM HUD)
+           ========================================= */
+        .gundam-3d-reflex {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 10;
+            border-radius: inherit;
+            mix-blend-mode: color-dodge;
+            transition: opacity 0.3s ease;
+        }
+        .info-card, .why-card, .testi-card, .social-card, .hours-card, .form-panel {
+            position: relative;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        /* Make inner content float slightly in 3D space inside cards */
+        .info-card > *, .why-card > *, .testi-card > *, .social-card > *, .hours-card > *, .form-panel > * {
+            transform: translateZ(15px);
+        }
+
+        /* =========================================
            CONTACT PAGE - HERO BANNER
            ========================================= */
         .contact-hero {
@@ -1870,22 +1893,68 @@
         }
 
         /* =========================================
-           SCROLL REVEAL ANIMATION
+           SCROLL REVEAL ANIMATION (3D PERSPECTIVE GUNDAM SCAN)
            ========================================= */
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.transform = 'perspective(1000px) translate3d(0, 0, 0) rotateX(0deg)';
                 }
             });
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.info-card, .form-panel, .social-card, .hours-card, .faq-item, .why-card, .testi-card').forEach(el => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.style.transform = 'perspective(1000px) translate3d(0, 50px, -80px) rotateX(15deg)';
+            el.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
             revealObserver.observe(el);
+        });
+
+        /* =========================================
+           INTERACTIVE 3D TILT & HOLO REFLECT (GUNDAM HUD)
+           ========================================= */
+        const cards3D = document.querySelectorAll('.info-card, .why-card, .testi-card, .social-card, .hours-card, .form-panel');
+        
+        cards3D.forEach(card => {
+            // Tạo lớp phản chiếu holo lấp lánh bên trong card
+            const reflex = document.createElement('div');
+            reflex.className = 'gundam-3d-reflex';
+            card.appendChild(reflex);
+            
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Tính toán tỷ lệ phần trăm lệch từ tâm (-0.5 đến 0.5)
+                const xPercent = (x / rect.width) - 0.5;
+                const yPercent = (y / rect.height) - 0.5;
+                
+                // Góc nghiêng tối đa
+                const maxRotation = 10; // degrees
+                
+                const rotateX = -yPercent * maxRotation;
+                const rotateY = xPercent * maxRotation;
+                
+                // Áp dụng transform 3D xoay theo chuột và nâng nhẹ các lớp con lên
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                card.style.transition = 'none'; // Phản hồi tức thì không bị trễ
+                
+                // Tạo vệt phản sáng di chuyển theo chuột
+                const reflexX = (x / rect.width) * 100;
+                const reflexY = (y / rect.height) * 100;
+                reflex.style.background = `radial-gradient(circle at ${reflexX}% ${reflexY}%, rgba(59, 130, 246, 0.25) 0%, transparent 60%)`;
+                reflex.style.opacity = '1';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                // Trả về trạng thái cân bằng mượt mà
+                card.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease';
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+                reflex.style.transition = 'background 0.5s ease, opacity 0.5s ease';
+                reflex.style.opacity = '0';
+            });
         });
     </script>
 </body>
